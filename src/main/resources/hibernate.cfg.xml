@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration">
+
+<hibernate-configuration>
+  <session-factory>
+    <!-- Dialeto do PostgreSQL -->
+    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+    
+    <!-- Driver do PostgreSQL -->
+    <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+    
+    <!-- URL de conexão do PostgreSQL -->
+    <property name="hibernate.connection.url">jdbc:postgresql://127.0.0.1:5432/meuSis</property>
+    
+    <!-- Usuário e senha do banco -->
+    <property name="hibernate.connection.username">postgres</property>
+    <property name="hibernate.connection.password">010906</property>
+    
+    <!-- Opções adicionais de configuração -->
+    <property name="hibernate.hbm2ddl.auto">update</property>
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.format_sql">true</property>
+    
+    <!-- Mapeamento das classes -->
+    <mapping class="model.Cliente"/>
+    <mapping class="model.Cidade"/>
+    <mapping class="model.Endereco"/>
+    <mapping class="model.Pedido"/>
+    <mapping class="model.Produto"/>
+    <mapping class="model.Fabricante"/>
+    <mapping class="model.ItemPedido"/>
+
+  </session-factory>
+</hibernate-configuration>
