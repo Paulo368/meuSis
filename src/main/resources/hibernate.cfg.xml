@@ -23,12 +23,11 @@
     
     <!-- Mapeamento das classes -->
     <mapping class="model.Cliente"/>
-    <mapping class="model.Cidade"/>
     <mapping class="model.Endereco"/>
     <mapping class="model.Pedido"/>
     <mapping class="model.Produto"/>
     <mapping class="model.Fabricante"/>
-    <mapping class="model.ItemPedido"/>
+    <mapping class="model.PedidoProduto"/>
 
   </session-factory>
 </hibernate-configuration>

@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,12 +18,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 
 /**
  *
@@ -47,8 +46,6 @@ public class Cliente implements Serializable {
     
     @Column ( length = 1)
     private char sexo;   
-    
-    @Column ( insertable = false )
     private String telFixo;    
     
     private String celular;    
@@ -58,14 +55,16 @@ public class Cliente implements Serializable {
     private byte[] foto;
     
     
-    @OneToOne
-    @JoinColumn ( name = "idEndereco")
+    @OneToOne (  mappedBy = "cliente", cascade = CascadeType.ALL)
+    @JoinColumn ( name = "idEndereco")    
     private Endereco endereco;
     
    
     @OneToMany ( mappedBy = "cliente", fetch = FetchType.LAZY )
     private List<Pedido> pedidos;
-    
+
+    public Cliente() {
+    }
     
     // SEM ID
     public Cliente(String nome, String cpf, Date dtNasc, char sexo, String cep, String logradouro, String bairro, int num, String complemento, String referencia, String telFixo, String celular, String email, byte[] foto) {
@@ -74,6 +73,7 @@ public class Cliente implements Serializable {
         this.dtNasc = dtNasc;
         this.sexo = sexo;
         this.endereco = new Endereco(cep, bairro, logradouro, num, complemento, referencia );
+        this.endereco.setCliente(this);
         this.telFixo = telFixo;
         this.celular = celular;
         this.email = email;
@@ -88,6 +88,7 @@ public class Cliente implements Serializable {
         this.dtNasc = dtNasc;
         this.sexo = sexo;
         this.endereco = new Endereco(idCliente, cep, bairro, logradouro, num, complemento, referencia );
+        this.endereco.setCliente(this);
         this.telFixo = telFixo;
         this.celular = celular;
         this.email = email;

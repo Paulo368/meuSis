@@ -22,9 +22,8 @@ public class Produto implements Serializable{
     @Id
     @GeneratedValue ( strategy = GenerationType.IDENTITY)
     private int idProduto;  
-    
+    private String nome;
     private double preco;
-    private int estoque;
     
     @ManyToOne ( fetch = FetchType.EAGER )
     @JoinColumn ( name = "idCliente")
@@ -33,11 +32,15 @@ public class Produto implements Serializable{
     public Produto() {
     }
 
-    public Produto(int idProduto, double preco, int estoque, Fabricante fabricante) {
+    public Produto(int idProduto, String nome, double preco) {
         this.idProduto = idProduto;
+        this.nome = nome;
         this.preco = preco;
-        this.estoque = estoque;
-        this.fabricante = fabricante;
+    }
+
+    public Produto(String nome, double preco) {
+        this.nome = nome;
+        this.preco = preco;
     }
 
     public int getIdProduto() {
@@ -56,26 +59,25 @@ public class Produto implements Serializable{
         this.preco = preco;
     }
 
-    public int getEstoque() {
-        return estoque;
-    }
-
-    public void setEstoque(int estoque) {
-        this.estoque = estoque;
-    }
-
     public Fabricante getFabricante() {
         return fabricante;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public void setFabricante(Fabricante fabricante) {
         this.fabricante = fabricante;
     }
-    
+
     @Override
     public String toString() {
-        return String.valueOf(idProduto);
-    }
-    
+        return nome;
+    }   
     
 }

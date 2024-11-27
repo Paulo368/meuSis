@@ -6,6 +6,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,29 +21,34 @@ import javax.persistence.OneToMany;
  */
 
 @Entity
-public class Fabricante implements Serializable{
+public class Fabricante implements Serializable {
+
     @Id
-    @GeneratedValue ( strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idFabricante;
-    
-    @Column (name = "nomeCliente", nullable = false )
+
+    @Column(name = "nomeFabricante", nullable = false)
     private String nome;
-    @Column ( insertable = false )
-    private String telefone; 
+
+    @Column(nullable = true)  // Permitir nulo no telefone
+    private Integer telefone;  // Alterado de int para Integer para permitir nulo
+
     private String email;
-    
-    
-    
-    @OneToMany ( mappedBy = "fabricante", fetch = FetchType.LAZY )
+
+    @OneToMany(mappedBy = "fabricante", fetch = FetchType.LAZY)
     private List<Produto> produtos;
-    
-    
 
     public Fabricante() {
     }
 
-    public Fabricante(int idFabricante, String nome, String telefone, String email) {
+    public Fabricante(int idFabricante, String nome, Integer telefone, String email) {
         this.idFabricante = idFabricante;
+        this.nome = nome;
+        this.telefone = telefone;
+        this.email = email;
+    }
+
+    public Fabricante(String nome, Integer telefone, String email) {
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
@@ -64,11 +70,11 @@ public class Fabricante implements Serializable{
         this.nome = nome;
     }
 
-    public String getTelefone() {
+    public Integer getTelefone() {  // Alterado para Integer
         return telefone;
     }
 
-    public void setTelefone(String telefone) {
+    public void setTelefone(Integer telefone) {  // Alterado para Integer
         this.telefone = telefone;
     }
 
@@ -79,6 +85,31 @@ public class Fabricante implements Serializable{
     public void setEmail(String email) {
         this.email = email;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return nome;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.nome);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Fabricante other = (Fabricante) obj;
+        return Objects.equals(this.nome, other.nome);
+    }
 }

@@ -3,8 +3,6 @@ package model;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
@@ -38,6 +36,7 @@ public class Endereco implements Serializable {
     
     
 
+    @OneToOne
     @MapsId
     @JoinColumn ( name = "idEndereco")
     private Cliente cliente;
@@ -154,5 +153,12 @@ public class Endereco implements Serializable {
         this.referencia = referencia;
     }
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
     
 }

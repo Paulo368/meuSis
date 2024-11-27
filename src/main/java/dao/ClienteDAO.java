@@ -4,7 +4,6 @@
  */
 package dao;
 
-import java.util.ArrayList;
 import java.util.List;
 import model.Cliente;
 
@@ -12,50 +11,41 @@ import model.Cliente;
  *
  * @author 1547816
  */
-public class ClienteDAO {
+public class ClienteDAO extends GenericDAO {
 
-    public void inserir(Cliente cli)  {
         
+    private List<Cliente> pesquisar(String pesq)  {
         
-    }
-    
-    
-    public void alterar(Cliente cli )  {
+        // SOMENTE PARA TESTE
+        return this.listar(Cliente.class);
         
-        
-        
-    }
-    
-    
+        /*
+        List<Cliente> lista = new ArrayList();
+      
+        Session sessao = null;
+        try {
+            sessao = ConexaoHibernate.getSessionFactory().openSession();
+            sessao.beginTransaction();
 
-    public void excluir(Cliente cli)  {
-               
-    }
+            // OPERAÇÃO
 
-    public List<Cliente> listar()  {
-        return pesquisar(null,0);
-    }
-    
-    private List<Cliente> pesquisar(String pesq, int tipo)  {
-                List<Cliente> lista = new ArrayList();
-        
+            sessao.getTransaction().commit();
+            sessao.close();
+        } catch ( HibernateException erro) {
+            if ( sessao != null ) {
+                sessao.getTransaction().rollback();
+            }
+            throw new HibernateException(erro);            
+        }        
       
         
         return null; 
-                 
+          */       
     }
     
     
     public List<Cliente> pesquisarPorNome(String pesq)  {
-        return pesquisar(pesq, 1);
-    }
-    
-    public List<Cliente> pesquisarPorBairro(String pesq)  {
-        return pesquisar(pesq, 2);
-    }
-    
-    public List<Cliente> pesquisarPorMes(String pesq)  {
-        return pesquisar(pesq, 3);
+        return pesquisar(pesq);
     }
     
 }
