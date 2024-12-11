@@ -5,7 +5,10 @@
 package view;
 
 import control.GerenciadorInterGrafica;
+import java.text.ParseException;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import model.Cliente;
 import model.Fabricante;
 
 /**
@@ -23,6 +26,8 @@ public class DlgCadFabricante extends javax.swing.JDialog {
         fabSelecionado = null;
 
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,6 +48,7 @@ public class DlgCadFabricante extends javax.swing.JDialog {
         txtEmail = new javax.swing.JTextField();
         btnNovo = new javax.swing.JButton();
         btnCancelar1 = new javax.swing.JButton();
+        btnPesquisar = new javax.swing.JButton();
 
         jTextField2.setText("jTextField2");
 
@@ -119,6 +125,13 @@ public class DlgCadFabricante extends javax.swing.JDialog {
             }
         });
 
+        btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/png/16x16/database_search.png"))); // NOI18N
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -128,11 +141,13 @@ public class DlgCadFabricante extends javax.swing.JDialog {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(78, 78, 78)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnNovo)
                 .addGap(18, 18, 18)
                 .addComponent(btnCancelar1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,13 +157,14 @@ public class DlgCadFabricante extends javax.swing.JDialog {
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNovo)
-                    .addComponent(btnCancelar1))
+                    .addComponent(btnCancelar1)
+                    .addComponent(btnPesquisar))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomeActionPerformed
@@ -196,11 +212,37 @@ public class DlgCadFabricante extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnCancelar1ActionPerformed
 
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        fabSelecionado = GerenciadorInterGrafica.getMyInstance().abrirPesqFabricante();
+
+        if (fabSelecionado != null) {
+            try {
+                preencherCampos(fabSelecionado);
+            } catch (ParseException ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao preencher os dados do cliente: " + ex.getMessage(),
+                        "Preencher dados do cliente", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Nenhum cliente foi selecionado.",
+                    "Selecionar Cliente", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+    }//GEN-LAST:event_btnPesquisarActionPerformed
+
     private void limparCampos() {
         txtNome.setText("");
         txtTelefone.setText("");
         txtEmail.setText("");
         fabSelecionado = null;
+    }
+    
+    private void preencherCampos(Fabricante fab) throws ParseException {
+        if (fab != null) {
+            txtNome.setText(fab.getNome());
+            txtTelefone.setText(String.valueOf(fab.getTelefone()));
+            txtEmail.setText(fab.getEmail());           
+        }
+        // habilitarBotoes();
     }
 
     private boolean validarCampos(String nome, String telefoneStr, String email) {
@@ -233,6 +275,7 @@ public class DlgCadFabricante extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar1;
     private javax.swing.JButton btnNovo;
+    private javax.swing.JButton btnPesquisar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel lblEmail;

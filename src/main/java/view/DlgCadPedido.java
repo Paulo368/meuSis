@@ -66,8 +66,6 @@ public class DlgCadPedido extends javax.swing.JDialog {
         jScrollPane3 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
         btnAddProduto = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        cmbProduto = new javax.swing.JComboBox();
 
         mnuCadastar.setText("jMenuItem1");
         popCadPecas.add(mnuCadastar);
@@ -140,13 +138,16 @@ public class DlgCadPedido extends javax.swing.JDialog {
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lblNome, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(35, 35, 35)))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtPreco)
-                            .addComponent(txtCodigo)
-                            .addComponent(dtPedido, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtQtde)
-                            .addComponent(txtNome))))
-                .addContainerGap(37, Short.MAX_VALUE))
+                            .addComponent(txtCodigo)
+                            .addComponent(txtPreco)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(dtPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addGap(22, 22, 22))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,50 +228,32 @@ public class DlgCadPedido extends javax.swing.JDialog {
             }
         });
 
-        jLabel2.setText("Produto");
-
-        cmbProduto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbProdutoActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 487, Short.MAX_VALUE)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cmbProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addComponent(btnCadastrar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnApagar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(110, 110, 110)
+                                .addComponent(btnCadastrar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnApagar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addComponent(btnAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(cmbProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnAddProduto)
                 .addGap(18, 18, 18)
@@ -291,19 +274,17 @@ public class DlgCadPedido extends javax.swing.JDialog {
         }
 
         // Obter os valores dos campos de entrada
-        String codigo = txtCodigo.getText();
         String preco = txtPreco.getText();
         String Qtde = txtQtde.getText();
 
         // Verificação se os campos não estão vazios
-        if (codigo.trim().isEmpty() || preco.trim().isEmpty() || Qtde.trim().isEmpty()) {
+        if (preco.trim().isEmpty() || Qtde.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Todos os campos são obrigatórios.", "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         try {
             // Converter os valores de texto para os tipos apropriados
-            int cod = Integer.parseInt(codigo);
             double pre = Double.parseDouble(preco);
             int quantidade = Integer.parseInt(Qtde);
 
@@ -319,11 +300,10 @@ public class DlgCadPedido extends javax.swing.JDialog {
             }
 
             // Inserir o pedido com os dados fornecidos
-            GerenciadorInterGrafica.getMyInstance().getGerDom().inserirPedido(dtPedido.getDate(), pre, cod, quantidade, cliSelecionado, pedidoProdutoModel.getLista());
+            GerenciadorInterGrafica.getMyInstance().getGerDom().inserirPedido(dtPedido.getDate(), pre, quantidade, cliSelecionado, pedidoProdutoModel.getLista());
 
             // Exibir uma mensagem de sucesso
             JOptionPane.showMessageDialog(this, "Pedido inserido com sucesso.", "Cadastro de Pedido", JOptionPane.INFORMATION_MESSAGE);
-            GerenciadorInterGrafica.getMyInstance().carregarCombo(cmbProduto, Produto.class);
 
         } catch (NumberFormatException e) {
             // Captura qualquer erro de conversão (por exemplo, se o preço ou quantidade não forem numéricos)
@@ -339,8 +319,8 @@ public class DlgCadPedido extends javax.swing.JDialog {
                 JOptionPane.WARNING_MESSAGE);
 
         if (resposta == JOptionPane.YES_OPTION) {
-            DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
-            modelo.setRowCount(0);  // Apaga todas as linhas da tabela
+            PedidoProdutoTableModel modelo = (PedidoProdutoTableModel) tabela.getModel();
+            modelo.limpar();  // Apaga todas as linhas da tabela
             JOptionPane.showMessageDialog(this, "Todos os dados foram apagados.", "Informação", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(this, "Ação cancelada. Nenhum dado foi apagado.", "Cancelamento", JOptionPane.INFORMATION_MESSAGE);
@@ -364,7 +344,7 @@ public class DlgCadPedido extends javax.swing.JDialog {
         String precoText = txtPreco.getText();  // Preço do produto
         Fabricante fabricante = (Fabricante) cmbFab.getSelectedItem();  // Fabricante selecionado
         String qtdeText = txtQtde.getText();  // Quantidade do produto a ser adicionada ao pedido
-
+        String cod = txtCodigo.getText();
         // Validação dos campos
         if (nome.isEmpty() || precoText.isEmpty() || fabricante == null || qtdeText.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos!", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -374,20 +354,22 @@ public class DlgCadPedido extends javax.swing.JDialog {
         // Verificar se preço e estoque são números válidos
         double preco;
         int quantidade;
+        int codigo;
         try {
             preco = Double.parseDouble(precoText);
             quantidade = Integer.parseInt(qtdeText);
+            codigo = Integer.parseInt(cod);
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Preço, Estoque ou Quantidade inválido. Por favor, insira números válidos.", "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         // Inserir produto no banco de dados
-        Produto novoProduto = new Produto(nome, preco);
+        Produto novoProduto = new Produto(nome, preco, codigo);
         novoProduto.setFabricante(fabricante);
 
         try {
-            int idProduto = GerenciadorInterGrafica.getMyInstance().getGerDom().inserirProduto(nome, preco, fabricante);
+            int idProduto = GerenciadorInterGrafica.getMyInstance().getGerDom().inserirProduto(nome, preco, codigo, fabricante);
             JOptionPane.showMessageDialog(null, "Produto inserido com sucesso! ID: " + idProduto, "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 
             // **Criar o ProdutoPedido**
@@ -406,10 +388,6 @@ public class DlgCadPedido extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_btnAddProdutoActionPerformed
-
-    private void cmbProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProdutoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbProdutoActionPerformed
 
     private void excluirLinhaSelecionada() {
         DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
@@ -508,10 +486,8 @@ public class DlgCadPedido extends javax.swing.JDialog {
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JComboBox cmbFab;
     private javax.swing.JComboBox cmbFab1;
-    private javax.swing.JComboBox cmbProduto;
     private com.toedter.calendar.JDateChooser dtPedido;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane3;

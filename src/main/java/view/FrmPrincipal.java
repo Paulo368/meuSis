@@ -45,6 +45,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         cadSair = new javax.swing.JMenuItem();
         mnuPesquisar = new javax.swing.JMenu();
         mnuPesqCli = new javax.swing.JMenuItem();
+        mnuPesquisaFab = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,6 +108,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         mnuPesquisar.add(mnuPesqCli);
 
+        mnuPesquisaFab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/png/16x16/process.png"))); // NOI18N
+        mnuPesquisaFab.setText("Fabricante");
+        mnuPesquisaFab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuPesquisaFabActionPerformed(evt);
+            }
+        });
+        mnuPesquisar.add(mnuPesquisaFab);
+
         jMenuBar1.add(mnuPesquisar);
 
         setJMenuBar(jMenuBar1);
@@ -149,6 +159,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         GerenciadorInterGrafica.getMyInstance().abrirPesqCliente();
     }//GEN-LAST:event_mnuPesqCliActionPerformed
 
+    private void mnuPesquisaFabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuPesquisaFabActionPerformed
+        GerenciadorInterGrafica.getMyInstance().abrirPesqFabricante();
+    }//GEN-LAST:event_mnuPesquisaFabActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem cadCliente;
@@ -159,6 +173,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu mnuCad;
     private javax.swing.JMenuItem mnuCadFabricante;
     private javax.swing.JMenuItem mnuPesqCli;
+    private javax.swing.JMenuItem mnuPesquisaFab;
     private javax.swing.JMenu mnuPesquisar;
     // End of variables declaration//GEN-END:variables
 }

@@ -24,6 +24,7 @@ public class Produto implements Serializable{
     private int idProduto;  
     private String nome;
     private double preco;
+    private int codigo;
     
     @ManyToOne ( fetch = FetchType.EAGER )
     @JoinColumn ( name = "idCliente")
@@ -32,16 +33,30 @@ public class Produto implements Serializable{
     public Produto() {
     }
 
-    public Produto(int idProduto, String nome, double preco) {
+    public Produto(int idProduto, String nome, double preco, int codigo) {
         this.idProduto = idProduto;
         this.nome = nome;
         this.preco = preco;
+        this.codigo = codigo;
     }
 
-    public Produto(String nome, double preco) {
+    public Produto(String nome, double preco, int codigo) {
         this.nome = nome;
         this.preco = preco;
+        this.codigo = codigo;
     }
+    
+    
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    
 
     public int getIdProduto() {
         return idProduto;

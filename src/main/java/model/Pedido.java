@@ -35,7 +35,6 @@ public class Pedido implements Serializable {
     @Column (updatable = false)
     private Date dtPedido; 
     private double preco;
-    private int codigo;
     private int Qtde;
     
     @ManyToOne ( fetch = FetchType.EAGER )
@@ -49,34 +48,24 @@ public class Pedido implements Serializable {
     public Pedido() {
     }
 
-    public Pedido(int idPedido, Date dtPedido, double preco, int codigo, int Qtde, Cliente cliente, List<PedidoProduto> listaItens) {
+    public Pedido(int idPedido, Date dtPedido, double preco, int Qtde, Cliente cliente, List<PedidoProduto> listaItens) {
         this.idPedido = idPedido;
         this.dtPedido = dtPedido;
         this.preco = preco;
-        this.codigo = codigo;
         this.Qtde = Qtde;
         this.cliente = cliente;
         this.listaItens = listaItens;
     }
 
-    public Pedido(Date dtPedido, double preco, int codigo, int Qtde, Cliente cliente, List<PedidoProduto> listaItens) {
+    public Pedido(Date dtPedido, double preco, int Qtde, Cliente cliente, List<PedidoProduto> listaItens) {
         this.dtPedido = dtPedido;
         this.preco = preco;
-        this.codigo = codigo;
         this.Qtde = Qtde;
         this.cliente = cliente;
         this.listaItens = listaItens;
     }
 
-
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
-
+    
     public int getQtde() {
         return Qtde;
     }

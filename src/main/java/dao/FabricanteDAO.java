@@ -10,17 +10,16 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import model.Cliente;
+import model.Fabricante;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 /**
  *
- * @author 1547816
+ * @author Paulo
  */
-public class ClienteDAO extends GenericDAO {
-
-        
-    private List<Cliente> pesquisar(String pesq)  {
+public class FabricanteDAO extends GenericDAO{
+    private List<Fabricante> pesquisar(String pesq)  {
         
         List lista = null;
         Session sessao = null;
@@ -30,8 +29,8 @@ public class ClienteDAO extends GenericDAO {
 
             // OPERAÇÃO
             CriteriaBuilder builder = sessao.getCriteriaBuilder();
-            CriteriaQuery consulta =  builder.createQuery(Cliente.class);
-            Root tabela = consulta.from( Cliente.class );
+            CriteriaQuery consulta =  builder.createQuery(Fabricante.class);
+            Root tabela = consulta.from( Fabricante.class );
             
             Predicate restricoes = builder.like(tabela.get("nome"), pesq + "%");
             
@@ -54,8 +53,7 @@ public class ClienteDAO extends GenericDAO {
     }
     
     
-    public List<Cliente> pesquisarPorNome(String pesq)  {
+    public List<Fabricante> pesquisarPorNome(String pesq)  {
         return pesquisar(pesq);
     }
-    
 }

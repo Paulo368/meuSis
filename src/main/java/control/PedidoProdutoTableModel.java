@@ -42,7 +42,7 @@ public class PedidoProdutoTableModel extends AbstractTableModel {
 
         switch (columnIndex) {
             case 0:
-                return item.getProduto().getIdProduto(); // Código do Produto
+                return item.getProduto().getCodigo(); // Código do Produto
             case 1:
                 return item.getProduto().getPreco();     // Preço
             case 2:
@@ -85,6 +85,12 @@ public class PedidoProdutoTableModel extends AbstractTableModel {
 
     public List<PedidoProduto> getLista() {
         return listaItens;
+    }
+    
+    // Método para limpar a lista de itens
+    public void limpar() {
+        listaItens.clear(); // Remove todos os elementos da lista
+        fireTableDataChanged(); // Notifica que os dados da tabela foram alterados
     }
 
 }

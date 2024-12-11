@@ -4,35 +4,29 @@
  */
 package view;
 
-import control.ClienteTableModel;
+import control.FabricanteTableModel;
 import control.GerenciadorInterGrafica;
-import java.awt.Component;
 import java.util.List;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.table.TableCellRenderer;
-import model.Cliente;
+import model.Fabricante;
 import org.hibernate.HibernateException;
 
 /**
  *
  * @author Paulo
  */
-public class DlgPesquisaCli extends javax.swing.JDialog {
+public class DlgPesquisaFab extends javax.swing.JDialog {
 
-    private Cliente cliSelecionado;
-    private ClienteTableModel tableClienteModel;
-
-    public DlgPesquisaCli(java.awt.Frame parent, boolean modal) {
+    private Fabricante fabSelecionado;
+    private FabricanteTableModel tableFabricanteModel;
+    public DlgPesquisaFab(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        fabSelecionado = null;
 
-        cliSelecionado = null;
-
-        tableClienteModel = new ClienteTableModel(); // Inicializa o modelo
-        tblClientes.setModel(tableClienteModel); // Associa o modelo à tabela
+        tableFabricanteModel = new FabricanteTableModel(); // Inicializa o modelo
+        tblFabricante.setModel(tableFabricanteModel); // Associa o modelo à tabela
     }
 
     /**
@@ -45,7 +39,7 @@ public class DlgPesquisaCli extends javax.swing.JDialog {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblClientes = new javax.swing.JTable();
+        tblFabricante = new javax.swing.JTable();
         btnCancelar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         btnSelecionar = new javax.swing.JButton();
@@ -55,15 +49,15 @@ public class DlgPesquisaCli extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        tblClientes.setModel(new javax.swing.table.DefaultTableModel(
+        tblFabricante.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nome", "Bairro", "Dt.Nasc", "Celular", "Foto"
+                "Nome", "Telefone", "Email"
             }
         ));
-        jScrollPane1.setViewportView(tblClientes);
+        jScrollPane1.setViewportView(tblFabricante);
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -96,8 +90,7 @@ public class DlgPesquisaCli extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("NOME");
+        jLabel1.setText("Fabricante");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,85 +98,86 @@ public class DlgPesquisaCli extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPesq, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPesquisar)
-                        .addGap(0, 2, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)))
-                .addContainerGap())
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtPesq, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnPesquisar)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPesq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
                     .addComponent(btnPesquisar)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtPesq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 293, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancelar)
                     .addComponent(btnSelecionar)
-                    .addComponent(btnExcluir))
+                    .addComponent(btnExcluir)
+                    .addComponent(btnCancelar))
                 .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(40, 40, 40)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(36, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    public Cliente getCliSelecionado() {
-        return cliSelecionado;
+    public Fabricante getFabSelecionado() {
+        return fabSelecionado;
     }
-
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        cliSelecionado = null;  // Limpar o cliente selecionado
+        fabSelecionado = null;
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        int linha = tblClientes.getSelectedRow(); // Obtém a linha selecionada na tabela
+        int linha = tblFabricante.getSelectedRow(); // Obtém a linha selecionada na tabela
 
         if (linha >= 0) {
             try {
-                Cliente cli = tableClienteModel.getCliente(linha);  // Obtém o cliente da linha selecionada
+                Fabricante cli = tableFabricanteModel.getFabricante(linha);  // Obtém o cliente da linha selecionada
                 GerenciadorInterGrafica.getMyInstance().getGerDom().excluir(cli);  // Exclui o cliente
 
                 // Atualiza o JTable após a exclusão
-                tableClienteModel.remover(linha);
-                JOptionPane.showMessageDialog(this, "Cliente excluído com sucesso.", "Exclusão de Cliente", JOptionPane.INFORMATION_MESSAGE);
+                tableFabricanteModel.remover(linha);
+                JOptionPane.showMessageDialog(this, "Fabricante excluído com sucesso.", "Exclusão de Cliente", JOptionPane.INFORMATION_MESSAGE);
             } catch (HibernateException ex) {
-                JOptionPane.showMessageDialog(this, "Erro ao excluir o cliente: " + ex.getMessage(), "Erro ao Excluir", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Erro ao excluir o fabricante: " + ex.getMessage(), "Erro ao Excluir", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(this, "Selecione um cliente para excluir.", "Erro", JOptionPane.WARNING_MESSAGE);
         }
-
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
 
-        int linha = tblClientes.getSelectedRow();
+        int linha = tblFabricante.getSelectedRow();
 
         if (linha >= 0) {
-            cliSelecionado = tableClienteModel.getCliente(linha);
+            fabSelecionado = tableFabricanteModel.getFabricante(linha);
             this.dispose();
 
         } else {
-            JOptionPane.showMessageDialog(this, "Selecione um cliente", "Pesquisar Cliente", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Selecione um Fabricante", "Pesquisar Fabricante", JOptionPane.ERROR_MESSAGE);
         }
 
         this.setVisible(false);
@@ -199,20 +193,20 @@ public class DlgPesquisaCli extends javax.swing.JDialog {
 
         try {
             // Realiza a pesquisa no banco de dados
-            List<Cliente> lista = GerenciadorInterGrafica.getMyInstance().getGerDom().pesquisarCliente(pesquisa);
+            List<Fabricante> lista = GerenciadorInterGrafica.getMyInstance().getGerDom().pesquisarFabricante(pesquisa);
 
             if (lista.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Nenhum cliente encontrado para o termo informado.", "Pesquisa", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Nenhum fabricante encontrado para o termo informado.", "Pesquisa", JOptionPane.INFORMATION_MESSAGE);
             }
 
             // Atualiza o JTable com os resultados da pesquisa
-            tableClienteModel.setLista(lista);
+            tableFabricanteModel.setLista(lista);
 
         } catch (HibernateException ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao pesquisar clientes: " + ex.getMessage(), "Erro de Pesquisa", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Erro ao pesquisar fabricantes: " + ex.getMessage(), "Erro de Pesquisa", JOptionPane.ERROR_MESSAGE);
         }
-
     }//GEN-LAST:event_btnPesquisarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
@@ -221,7 +215,7 @@ public class DlgPesquisaCli extends javax.swing.JDialog {
     private javax.swing.JButton btnSelecionar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblClientes;
+    private javax.swing.JTable tblFabricante;
     private javax.swing.JTextField txtPesq;
     // End of variables declaration//GEN-END:variables
 }

@@ -12,6 +12,7 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import model.Cliente;
+import model.Fabricante;
 import org.hibernate.HibernateException;
 import view.DlgCadCliente;
 import view.DlgCadFabricante;
@@ -19,6 +20,7 @@ import view.DlgCadPedido;
 import view.DlgConfiguracoes;
 import view.DlgPesqCliente;
 import view.DlgPesquisaCli;
+import view.DlgPesquisaFab;
 import view.FrmPrincipal;
 
 /**
@@ -33,6 +35,7 @@ public class GerenciadorInterGrafica {
     private DlgConfiguracoes config = null;
     private DlgPesquisaCli pesqCli = null;
     private DlgCadFabricante fab = null;
+    private DlgPesquisaFab pesqFab = null;
 
     GerenciadorDominio gerDom;
 //    GerenciadorDominioCliente gerDomCli;
@@ -88,10 +91,12 @@ public class GerenciadorInterGrafica {
     public void abrirCadastroPedido() {
         cadPed = (DlgCadPedido) abrirJanela(princ, cadPed, DlgCadPedido.class);
     }
-
-//    public void abrirConfiguracoes () {
-//        config = (DlgConfiguracoes) abrirJanela(princ, config,  DlgConfiguracoes.class );
-//    }
+    
+    public Fabricante abrirPesqFabricante(){
+        pesqFab = (DlgPesquisaFab) abrirJanela(princ, pesqFab, DlgPesquisaFab.class);
+        return pesqFab.getFabSelecionado();
+    }
+    
     public void abrirCadastroFabricante() {
         fab = (DlgCadFabricante) abrirJanela(princ, fab, DlgCadFabricante.class);
     }
