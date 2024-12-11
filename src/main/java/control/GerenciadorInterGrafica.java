@@ -13,6 +13,7 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import model.Cliente;
 import model.Fabricante;
+import model.Pedido;
 import org.hibernate.HibernateException;
 import view.DlgCadCliente;
 import view.DlgCadFabricante;
@@ -21,6 +22,7 @@ import view.DlgConfiguracoes;
 import view.DlgPesqCliente;
 import view.DlgPesquisaCli;
 import view.DlgPesquisaFab;
+import view.DlgPesquisaPedido;
 import view.FrmPrincipal;
 
 /**
@@ -36,6 +38,7 @@ public class GerenciadorInterGrafica {
     private DlgPesquisaCli pesqCli = null;
     private DlgCadFabricante fab = null;
     private DlgPesquisaFab pesqFab = null;
+    private DlgPesquisaPedido pesqPed = null;
 
     GerenciadorDominio gerDom;
 //    GerenciadorDominioCliente gerDomCli;
@@ -99,6 +102,11 @@ public class GerenciadorInterGrafica {
     
     public void abrirCadastroFabricante() {
         fab = (DlgCadFabricante) abrirJanela(princ, fab, DlgCadFabricante.class);
+    }
+    
+    public Pedido abrirPesqPedidos() {
+        pesqPed = (DlgPesquisaPedido) abrirJanela(princ, pesqPed, DlgPesquisaPedido.class );
+        return pesqPed.getPedidoSelecionado();
     }
 
     public void carregarCombo(JComboBox combo, Class<?> classe) {

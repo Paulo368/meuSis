@@ -8,14 +8,13 @@ import dao.ClienteDAO;
 import dao.ConexaoHibernate;
 import dao.FabricanteDAO;
 import dao.GenericDAO;
+import dao.PedidoDAO;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import javax.swing.Icon;
-import model.Cidade;
 import model.Cliente;
 import model.Fabricante;
-import model.ItemPedido;
 import model.Pedido;
 import model.PedidoProduto;
 import model.Produto;
@@ -30,6 +29,7 @@ public class GerenciadorDominio {
     private ClienteDAO cliDAO;
     private GenericDAO generic;
     private FabricanteDAO fabDAO;
+    private PedidoDAO pedDAO;
 
     public GerenciadorDominio() throws ExceptionInInitializerError, HibernateException {
 
@@ -39,6 +39,7 @@ public class GerenciadorDominio {
         cliDAO = new ClienteDAO();
         generic = new GenericDAO();
         fabDAO = new FabricanteDAO();
+        pedDAO = new PedidoDAO();
 
     }
 
@@ -114,10 +115,25 @@ public class GerenciadorDominio {
     public List<Fabricante> pesquisarFabricante(String pesq) throws HibernateException {
         return fabDAO.pesquisarPorNome(pesq);
     } 
+    
+    public List<Pedido> pesquisarPedido(int tipo, String pesq) throws HibernateException {
+        switch (tipo) {
+            case 0: return pedDAO.pesquisarPorID(pesq);
+            case 1: return pedDAO.pesquisarPorCliente(pesq);
+            default : return null;
+        }
+        
+    }
+    
+    
 
     public void inserirPedido(Date dataPedido, double preco, int quantidade, Cliente cliente, List<PedidoProduto> listaItens) {
         Pedido ped = new Pedido(dataPedido, preco, quantidade, cliente, listaItens);
         cliDAO.inserir(ped);
+    }
+    
+    public void getItensPedido(Pedido pedido) throws HibernateException {
+        pedDAO.carregarItens(pedido);                
     }
 
 }

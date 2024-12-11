@@ -46,6 +46,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         mnuPesquisar = new javax.swing.JMenu();
         mnuPesqCli = new javax.swing.JMenuItem();
         mnuPesquisaFab = new javax.swing.JMenuItem();
+        mnuPesqPedido = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -117,6 +118,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         mnuPesquisar.add(mnuPesquisaFab);
 
+        mnuPesqPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/png/16x16/shopping_cart.png"))); // NOI18N
+        mnuPesqPedido.setText("Pedido");
+        mnuPesqPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuPesqPedidoActionPerformed(evt);
+            }
+        });
+        mnuPesquisar.add(mnuPesqPedido);
+
         jMenuBar1.add(mnuPesquisar);
 
         setJMenuBar(jMenuBar1);
@@ -163,6 +173,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         GerenciadorInterGrafica.getMyInstance().abrirPesqFabricante();
     }//GEN-LAST:event_mnuPesquisaFabActionPerformed
 
+    private void mnuPesqPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuPesqPedidoActionPerformed
+        GerenciadorInterGrafica.getMyInstance().abrirPesqPedidos();
+    }//GEN-LAST:event_mnuPesqPedidoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem cadCliente;
@@ -173,6 +187,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu mnuCad;
     private javax.swing.JMenuItem mnuCadFabricante;
     private javax.swing.JMenuItem mnuPesqCli;
+    private javax.swing.JMenuItem mnuPesqPedido;
     private javax.swing.JMenuItem mnuPesquisaFab;
     private javax.swing.JMenu mnuPesquisar;
     // End of variables declaration//GEN-END:variables
