@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relPedidos_subreport1" language="groovy" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="7868a813-2dc9-4498-b9bb-777b36157c99">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="ingredientes" class="java.lang.String">
+		<fieldDescription><![CDATA[ingredientes]]></fieldDescription>
+	</field>
+	<field name="lanche" class="model.Lanche">
+		<fieldDescription><![CDATA[lanche]]></fieldDescription>
+	</field>
+	<field name="maisBife" class="java.lang.Integer">
+		<fieldDescription><![CDATA[maisBife]]></fieldDescription>
+	</field>
+	<field name="maisOvo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[maisOvo]]></fieldDescription>
+	</field>
+	<field name="maisPresunto" class="java.lang.Integer">
+		<fieldDescription><![CDATA[maisPresunto]]></fieldDescription>
+	</field>
+	<field name="maisQueijo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[maisQueijo]]></fieldDescription>
+	</field>
+	<field name="observacao" class="java.lang.String">
+		<fieldDescription><![CDATA[observacao]]></fieldDescription>
+	</field>
+	<field name="pedido" class="model.Pedido">
+		<fieldDescription><![CDATA[pedido]]></fieldDescription>
+	</field>
+	<field name="qtde" class="java.lang.Integer">
+		<fieldDescription><![CDATA[qtde]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="22">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="140" height="20" backcolor="#CCFFCC" uuid="cceacb01-29f0-4b84-8c50-a9922441407a"/>
+				<textFieldExpression><![CDATA[""+$F{lanche}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="140" y="0" width="100" height="20" backcolor="#CCFFCC" uuid="71fc12ab-5714-4555-8056-8675395bfd13"/>
+				<textFieldExpression><![CDATA[$F{qtde}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="240" y="0" width="100" height="20" backcolor="#CCFFCC" uuid="c58d5325-cf61-41ff-a5f3-ecd79186b3e2"/>
+				<textFieldExpression><![CDATA[$F{ingredientes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="340" y="0" width="100" height="20" backcolor="#CCFFCC" uuid="c00de335-9c43-40a7-8cbd-6bc4b55763a8"/>
+				<textFieldExpression><![CDATA[$F{observacao}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="2" y="19" width="438" height="1" uuid="0ad43e87-c916-4abf-978d-48780af54c8a"/>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

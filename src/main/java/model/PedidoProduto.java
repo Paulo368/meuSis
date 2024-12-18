@@ -21,6 +21,7 @@ public class PedidoProduto implements Serializable {
     private int qtde;
 
     public PedidoProduto() {
+        this.chaveComposta = new PedidoProdutoPK();
     }
 
     public PedidoProduto(Pedido pedido, Produto produto, int qtde) {

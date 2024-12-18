@@ -39,14 +39,17 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         mnuCad = new javax.swing.JMenu();
         cadCliente = new javax.swing.JMenuItem();
-        cadPedido = new javax.swing.JMenuItem();
         mnuCadFabricante = new javax.swing.JMenuItem();
+        mnuCadProduto = new javax.swing.JMenuItem();
+        cadPedido = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         cadSair = new javax.swing.JMenuItem();
         mnuPesquisar = new javax.swing.JMenu();
         mnuPesqCli = new javax.swing.JMenuItem();
         mnuPesquisaFab = new javax.swing.JMenuItem();
-        mnuPesqPedido = new javax.swing.JMenuItem();
+        mnuPesquisaPedido = new javax.swing.JMenuItem();
+        mnuRelatorio = new javax.swing.JMenu();
+        mnuRelatorioCliente = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,15 +70,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         mnuCad.add(cadCliente);
 
-        cadPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/png/16x16/shopping_cart.png"))); // NOI18N
-        cadPedido.setText("Pedido");
-        cadPedido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cadPedidoActionPerformed(evt);
-            }
-        });
-        mnuCad.add(cadPedido);
-
         mnuCadFabricante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/png/16x16/process.png"))); // NOI18N
         mnuCadFabricante.setText("Fabricante");
         mnuCadFabricante.addActionListener(new java.awt.event.ActionListener() {
@@ -84,6 +78,24 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
         mnuCad.add(mnuCadFabricante);
+
+        mnuCadProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/png/16x16/favorite.png"))); // NOI18N
+        mnuCadProduto.setText("Produto");
+        mnuCadProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuCadProdutoActionPerformed(evt);
+            }
+        });
+        mnuCad.add(mnuCadProduto);
+
+        cadPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/png/16x16/shopping_cart.png"))); // NOI18N
+        cadPedido.setText("Pedido");
+        cadPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadPedidoActionPerformed(evt);
+            }
+        });
+        mnuCad.add(cadPedido);
         mnuCad.add(jSeparator1);
 
         cadSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/png/16x16/remove.png"))); // NOI18N
@@ -118,16 +130,34 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         mnuPesquisar.add(mnuPesquisaFab);
 
-        mnuPesqPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/png/16x16/shopping_cart.png"))); // NOI18N
-        mnuPesqPedido.setText("Pedido");
-        mnuPesqPedido.addActionListener(new java.awt.event.ActionListener() {
+        mnuPesquisaPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/png/16x16/shopping_cart.png"))); // NOI18N
+        mnuPesquisaPedido.setText("Pedido");
+        mnuPesquisaPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuPesqPedidoActionPerformed(evt);
+                mnuPesquisaPedidoActionPerformed(evt);
             }
         });
-        mnuPesquisar.add(mnuPesqPedido);
+        mnuPesquisar.add(mnuPesquisaPedido);
 
         jMenuBar1.add(mnuPesquisar);
+
+        mnuRelatorio.setText("Relatorios");
+        mnuRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuRelatorioActionPerformed(evt);
+            }
+        });
+
+        mnuRelatorioCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/png/16x16/note_accept.png"))); // NOI18N
+        mnuRelatorioCliente.setText("Relatorio Cliente");
+        mnuRelatorioCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuRelatorioClienteActionPerformed(evt);
+            }
+        });
+        mnuRelatorio.add(mnuRelatorioCliente);
+
+        jMenuBar1.add(mnuRelatorio);
 
         setJMenuBar(jMenuBar1);
 
@@ -139,7 +169,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addGap(0, 278, Short.MAX_VALUE)
         );
 
         pack();
@@ -173,9 +203,21 @@ public class FrmPrincipal extends javax.swing.JFrame {
         GerenciadorInterGrafica.getMyInstance().abrirPesqFabricante();
     }//GEN-LAST:event_mnuPesquisaFabActionPerformed
 
-    private void mnuPesqPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuPesqPedidoActionPerformed
-        GerenciadorInterGrafica.getMyInstance().abrirPesqPedidos();
-    }//GEN-LAST:event_mnuPesqPedidoActionPerformed
+    private void mnuCadProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCadProdutoActionPerformed
+        GerenciadorInterGrafica.getMyInstance().abrirCadastroProduto();
+    }//GEN-LAST:event_mnuCadProdutoActionPerformed
+
+    private void mnuRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuRelatorioActionPerformed
+
+    }//GEN-LAST:event_mnuRelatorioActionPerformed
+
+    private void mnuRelatorioClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuRelatorioClienteActionPerformed
+        GerenciadorInterGrafica.getMyInstance().abrirRelGroupBy();
+    }//GEN-LAST:event_mnuRelatorioClienteActionPerformed
+
+    private void mnuPesquisaPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuPesquisaPedidoActionPerformed
+        GerenciadorInterGrafica.getMyInstance().abrirPesqPedido();       
+    }//GEN-LAST:event_mnuPesquisaPedidoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -186,9 +228,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenu mnuCad;
     private javax.swing.JMenuItem mnuCadFabricante;
+    private javax.swing.JMenuItem mnuCadProduto;
     private javax.swing.JMenuItem mnuPesqCli;
-    private javax.swing.JMenuItem mnuPesqPedido;
     private javax.swing.JMenuItem mnuPesquisaFab;
+    private javax.swing.JMenuItem mnuPesquisaPedido;
     private javax.swing.JMenu mnuPesquisar;
+    private javax.swing.JMenu mnuRelatorio;
+    private javax.swing.JMenuItem mnuRelatorioCliente;
     // End of variables declaration//GEN-END:variables
 }

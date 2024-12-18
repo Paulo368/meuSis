@@ -9,16 +9,19 @@ import dao.ConexaoHibernate;
 import dao.FabricanteDAO;
 import dao.GenericDAO;
 import dao.PedidoDAO;
-import java.sql.SQLException;
+import java.text.NumberFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.Icon;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import model.Cliente;
 import model.Fabricante;
 import model.Pedido;
 import model.PedidoProduto;
 import model.Produto;
 import org.hibernate.HibernateException;
+import org.hibernate.Session;
 
 /**
  *
@@ -93,11 +96,32 @@ public class GerenciadorDominio {
         generic.alterar(fab);
     }
 
-    public int inserirPedido(String nome, int telefone, String email) throws HibernateException {
-        Fabricante fab = new Fabricante(nome, telefone, email);
-        generic.inserir(fab);
+    public int inserirPedido(Date dtPedido, int qtde, double valorTotal, Cliente cliente) throws HibernateException {
+        Pedido ped = new Pedido(dtPedido, qtde, valorTotal, cliente);
 
-        return fab.getIdFabricante();
+        // Abrir sessão e iniciar transação
+        Session sessao = ConexaoHibernate.getSessionFactory().openSession();
+        try {
+            sessao.beginTransaction();
+
+            // Salvar o pedido (com os itens devido ao CascadeType.ALL)
+            sessao.save(ped);
+
+            // Commit da transação
+            sessao.getTransaction().commit();
+        } catch (HibernateException erro) {
+            // Caso ocorra erro, realizar rollback
+            if (sessao != null && sessao.getTransaction() != null) {
+                sessao.getTransaction().rollback();
+            }
+            throw new HibernateException("Erro ao salvar o pedido e seus itens", erro);
+        } finally {
+            // Fechar a sessão
+            if (sessao != null) {
+                sessao.close();
+            }
+        }
+        return ped.getIdPedido();
     }
 
     public int inserirProduto(String nome, double preco, int codigo, Fabricante fabricante) throws HibernateException {
@@ -111,29 +135,73 @@ public class GerenciadorDominio {
     public List<Cliente> pesquisarCliente(String pesq) throws HibernateException {
         return cliDAO.pesquisarPorNome(pesq);
     }
-    
+
     public List<Fabricante> pesquisarFabricante(String pesq) throws HibernateException {
         return fabDAO.pesquisarPorNome(pesq);
-    } 
-    
+    }
+
     public List<Pedido> pesquisarPedido(int tipo, String pesq) throws HibernateException {
         switch (tipo) {
-            case 0: return pedDAO.pesquisarPorID(pesq);
-            case 1: return pedDAO.pesquisarPorCliente(pesq);
-            default : return null;
+            case 0:
+                return pedDAO.pesquisarPorID(pesq);
+            case 1:
+                return pedDAO.pesquisarPorCliente(pesq);
+            default:
+                return null;
         }
-        
-    }
-    
-    
 
-    public void inserirPedido(Date dataPedido, double preco, int quantidade, Cliente cliente, List<PedidoProduto> listaItens) {
-        Pedido ped = new Pedido(dataPedido, preco, quantidade, cliente, listaItens);
-        cliDAO.inserir(ped);
     }
-    
+
     public void getItensPedido(Pedido pedido) throws HibernateException {
-        pedDAO.carregarItens(pedido);                
+        pedDAO.carregarItens(pedido);
+    }
+
+    public void relGroupBy(JTable tabela, int tipo) throws Exception {
+        List<Object[]> lista = null;
+
+        // Limpa a tabela
+        ((DefaultTableModel) tabela.getModel()).setRowCount(0);
+
+        switch (tipo) {
+            case 'C':
+                lista = pedDAO.valorPorCliente();
+                break;
+        }
+
+        NumberFormat formato = NumberFormat.getCurrencyInstance();
+
+        // Percorrer a LISTA
+        if (lista != null) {
+
+            for (Object[] obj : lista) {
+                switch (tipo) {
+                    case 'C':
+                        obj[1] = formato.format(Double.parseDouble(obj[1].toString()));
+                        break;
+
+                }
+
+                ((DefaultTableModel) tabela.getModel()).addRow(obj);
+            }
+
+        }
+    }
+
+    public Pedido carregarPedido(int idPedido) throws HibernateException {
+        Session sessao = null;
+        Pedido pedido = null;
+
+        try {
+            sessao = ConexaoHibernate.getSessionFactory().openSession();
+            pedido = sessao.get(Pedido.class, idPedido); // Carrega o pedido pelo ID
+        } catch (HibernateException erro) {
+            throw new HibernateException("Erro ao carregar o pedido", erro);
+        } finally {
+            if (sessao != null) {
+                sessao.close();
+            }
+        }
+        return pedido;
     }
 
 }

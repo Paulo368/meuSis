@@ -21,31 +21,43 @@ public class DlgPesquisaPedido extends javax.swing.JDialog {
     private Pedido pedSelecionado = null;
     
     private PedidoTableModel pedTableModel;
-    
+
+    /**
+     * Creates new form ClientePesqFrame
+     */
     public DlgPesquisaPedido(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         pedSelecionado = null;
         
         // ASSOCIAR o TABLE MODEL ABSTRACT
         pedTableModel = new PedidoTableModel();
         tblPedidos.setModel(pedTableModel);
+        
+        // Para ORDENAR com clicar na COLUNA
+        /*
+        TableRowSorter<TableModel> sorter;
+        sorter = new TableRowSorter<TableModel>(tblPedidos.getModel() );
+        tblPedidos.setRowSorter(sorter);
+        */
     }
 
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         cmbTipo = new javax.swing.JComboBox();
+        btnSelecionar = new javax.swing.JButton();
+        btnProdutos = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
-        btnPedido = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblPedidos = new javax.swing.JTable();
         txtPesq = new javax.swing.JTextField();
         btnPesquisar = new javax.swing.JButton();
-        btnSelecionar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
+        btnRel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -56,6 +68,20 @@ public class DlgPesquisaPedido extends javax.swing.JDialog {
             }
         });
 
+        btnSelecionar.setText("Selecionar");
+        btnSelecionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelecionarActionPerformed(evt);
+            }
+        });
+
+        btnProdutos.setText("Produto");
+        btnProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProdutosActionPerformed(evt);
+            }
+        });
+
         btnExcluir.setText("Excluir");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,10 +89,10 @@ public class DlgPesquisaPedido extends javax.swing.JDialog {
             }
         });
 
-        btnPedido.setText("Pedido");
-        btnPedido.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPedidoActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
 
@@ -88,17 +114,10 @@ public class DlgPesquisaPedido extends javax.swing.JDialog {
             }
         });
 
-        btnSelecionar.setText("Selecionar");
-        btnSelecionar.addActionListener(new java.awt.event.ActionListener() {
+        btnRel.setText("Relatórios");
+        btnRel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSelecionarActionPerformed(evt);
-            }
-        });
-
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
+                btnRelActionPerformed(evt);
             }
         });
 
@@ -115,14 +134,17 @@ public class DlgPesquisaPedido extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPesq)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnPesquisar)))
+                                .addComponent(txtPesq, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnPesquisar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnRel)
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnSelecionar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                        .addComponent(btnPedido)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnProdutos)
                         .addGap(32, 32, 32)
                         .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40)
@@ -136,13 +158,14 @@ public class DlgPesquisaPedido extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPesq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPesquisar))
+                    .addComponent(btnPesquisar)
+                    .addComponent(btnRel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSelecionar)
-                    .addComponent(btnPedido)
+                    .addComponent(btnProdutos)
                     .addComponent(btnExcluir)
                     .addComponent(btnCancelar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -150,6 +173,33 @@ public class DlgPesquisaPedido extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cmbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbTipoActionPerformed
+
+    private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
+        // TODO add your handling code here:
+
+        pedSelecionado = pegarLinhaSelecionada();
+        this.setVisible(false);
+    }//GEN-LAST:event_btnSelecionarActionPerformed
+
+    private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
+        pedSelecionado = pegarLinhaSelecionada();
+        if ( pedSelecionado != null ) {
+            String msg = "";
+
+            GerenciadorInterGrafica.getMyInstance().getGerDom().getItensPedido(pedSelecionado);
+
+            for (PedidoProduto pd : pedSelecionado.getListaItens()  ) {
+                String nome = pd.getProduto().getNome();
+                msg = msg.concat(nome).concat("\n");
+            }
+            JOptionPane.showMessageDialog(this, msg);
+        }
+
+    }//GEN-LAST:event_btnProdutosActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         pedSelecionado = pegarLinhaSelecionada();
@@ -179,21 +229,11 @@ public class DlgPesquisaPedido extends javax.swing.JDialog {
 
     }//GEN-LAST:event_btnExcluirActionPerformed
 
-    private void btnPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidoActionPerformed
-        pedSelecionado = pegarLinhaSelecionada();
-        if ( pedSelecionado != null ) {
-            String msg = "";
-
-            GerenciadorInterGrafica.getMyInstance().getGerDom().getItensPedido(pedSelecionado );
-
-            for (PedidoProduto ip : pedSelecionado.getListaItens()  ) {
-                String nome = ip.getProduto().getNome();
-                msg = msg.concat(nome).concat("\n");
-            }
-            JOptionPane.showMessageDialog(this, msg);
-        }
-
-    }//GEN-LAST:event_btnPedidoActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        pedSelecionado = null;
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
 
@@ -210,22 +250,12 @@ public class DlgPesquisaPedido extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
-    private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
-        // TODO add your handling code here:
+    private void btnRelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelActionPerformed
 
-        pedSelecionado = pegarLinhaSelecionada();
-        this.setVisible(false);
-    }//GEN-LAST:event_btnSelecionarActionPerformed
+        List lista = pedTableModel.getLista();
+        GerenciadorInterGrafica.getMyInstance().getGerRel().relComLista(lista, "relPedidos.jasper");
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
-        pedSelecionado = null;
-        this.setVisible(false);
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void cmbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbTipoActionPerformed
+    }//GEN-LAST:event_btnRelActionPerformed
 
     public Pedido getPedidoSelecionado() {
         return pedSelecionado;
@@ -246,8 +276,9 @@ public class DlgPesquisaPedido extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnExcluir;
-    private javax.swing.JButton btnPedido;
     private javax.swing.JButton btnPesquisar;
+    private javax.swing.JButton btnProdutos;
+    private javax.swing.JButton btnRel;
     private javax.swing.JButton btnSelecionar;
     private javax.swing.JComboBox cmbTipo;
     private javax.swing.JScrollPane jScrollPane2;

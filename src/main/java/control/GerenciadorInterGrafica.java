@@ -18,11 +18,11 @@ import org.hibernate.HibernateException;
 import view.DlgCadCliente;
 import view.DlgCadFabricante;
 import view.DlgCadPedido;
-import view.DlgConfiguracoes;
-import view.DlgPesqCliente;
+import view.DlgCadProduto;
 import view.DlgPesquisaCli;
 import view.DlgPesquisaFab;
 import view.DlgPesquisaPedido;
+import view.DlgRelGroupBy;
 import view.FrmPrincipal;
 
 /**
@@ -34,13 +34,15 @@ public class GerenciadorInterGrafica {
     private FrmPrincipal princ = null;
     private DlgCadCliente cadCli = null;
     private DlgCadPedido cadPed = null;
-    private DlgConfiguracoes config = null;
     private DlgPesquisaCli pesqCli = null;
     private DlgCadFabricante fab = null;
     private DlgPesquisaFab pesqFab = null;
+    private DlgCadProduto cadProd = null;
+    private DlgRelGroupBy relGroupBy = null;
     private DlgPesquisaPedido pesqPed = null;
 
     GerenciadorDominio gerDom;
+    GerenciadorDeRelatorios gerRel;
 //    GerenciadorDominioCliente gerDomCli;
 //    GerenciadorDominioVendas gerDomVendas;
 
@@ -62,6 +64,10 @@ public class GerenciadorInterGrafica {
 
     public GerenciadorDominio getGerDom() {
         return gerDom;
+    }
+    
+    public GerenciadorDeRelatorios getGerRel() {
+        return gerRel;
     }
 
     // ABRIR JDIALOG
@@ -95,6 +101,11 @@ public class GerenciadorInterGrafica {
         cadPed = (DlgCadPedido) abrirJanela(princ, cadPed, DlgCadPedido.class);
     }
     
+    public Pedido abrirPesqPedido() {
+        pesqPed = (DlgPesquisaPedido) abrirJanela(princ, pesqPed, DlgPesquisaPedido.class);
+        return pesqPed.getPedidoSelecionado();
+    }
+    
     public Fabricante abrirPesqFabricante(){
         pesqFab = (DlgPesquisaFab) abrirJanela(princ, pesqFab, DlgPesquisaFab.class);
         return pesqFab.getFabSelecionado();
@@ -104,9 +115,12 @@ public class GerenciadorInterGrafica {
         fab = (DlgCadFabricante) abrirJanela(princ, fab, DlgCadFabricante.class);
     }
     
-    public Pedido abrirPesqPedidos() {
-        pesqPed = (DlgPesquisaPedido) abrirJanela(princ, pesqPed, DlgPesquisaPedido.class );
-        return pesqPed.getPedidoSelecionado();
+    public void abrirCadastroProduto() {
+        cadProd = (DlgCadProduto) abrirJanela(princ, cadProd, DlgCadProduto.class);
+    }
+    
+    public void abrirRelGroupBy() {
+        relGroupBy = (DlgRelGroupBy) abrirJanela(princ, relGroupBy,  DlgRelGroupBy.class );
     }
 
     public void carregarCombo(JComboBox combo, Class<?> classe) {

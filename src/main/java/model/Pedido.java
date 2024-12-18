@@ -34,8 +34,8 @@ public class Pedido implements Serializable {
     @Temporal ( value = TemporalType.DATE) 
     @Column (updatable = false)
     private Date dtPedido; 
-    private double preco;
     private int Qtde;
+    private double valorTotal;
     
     @ManyToOne ( fetch = FetchType.EAGER )
     @JoinColumn ( name = "idCliente")
@@ -48,22 +48,23 @@ public class Pedido implements Serializable {
     public Pedido() {
     }
 
-    public Pedido(int idPedido, Date dtPedido, double preco, int Qtde, Cliente cliente, List<PedidoProduto> listaItens) {
+    public Pedido(int idPedido, Date dtPedido, int Qtde, double valorTotal, Cliente cliente, List<PedidoProduto> listaItens) {
         this.idPedido = idPedido;
         this.dtPedido = dtPedido;
-        this.preco = preco;
         this.Qtde = Qtde;
+        this.valorTotal = valorTotal;
         this.cliente = cliente;
         this.listaItens = listaItens;
     }
 
-    public Pedido(Date dtPedido, double preco, int Qtde, Cliente cliente, List<PedidoProduto> listaItens) {
+    public Pedido(Date dtPedido, int Qtde, double valorTotal, Cliente cliente) {
         this.dtPedido = dtPedido;
-        this.preco = preco;
         this.Qtde = Qtde;
+        this.valorTotal = valorTotal;
         this.cliente = cliente;
-        this.listaItens = listaItens;
     }
+
+    
 
     
     public int getQtde() {
@@ -98,21 +99,25 @@ public class Pedido implements Serializable {
         this.dtPedido = dtPedido;
     }
 
+    public double getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(double valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+    
+    
+
     public Cliente getCliente() {
         return cliente;
-    }
-
-    public double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(double preco) {
-        this.preco = preco;
     }
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+    
+    
     
     @Override
     public String toString() {

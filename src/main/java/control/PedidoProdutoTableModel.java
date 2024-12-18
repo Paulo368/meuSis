@@ -24,13 +24,13 @@ public class PedidoProdutoTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 5;
     }
 
     // Títulos das colunas
     @Override
     public String getColumnName(int column) {
-        String nomesColunas[] = {"Codigo", "Preco", "Qtde", "Fabricante"};
+        String nomesColunas[] = {"Cliente", "Produto", "Qtde", "Fabricante", "Valor Total"};
 
         return nomesColunas[column];
 
@@ -42,13 +42,15 @@ public class PedidoProdutoTableModel extends AbstractTableModel {
 
         switch (columnIndex) {
             case 0:
-                return item.getProduto().getCodigo(); // Código do Produto
+                return item.getPedido().getCliente().getNome();
             case 1:
-                return item.getProduto().getPreco();     // Preço
+                return item.getProduto().getNome(); // Código do Produto
             case 2:
-                return item.getQtde();                  // Quantidade
+                return item.getQtde();      // Preço
             case 3:
-                return item.getProduto().getFabricante().getNome(); // Nome do Fabricante
+                return item.getProduto().getFabricante().getNome();                
+            case 4:
+                return item.getQtde() * item.getProduto().getPreco();
             default:
                 return null;
         }
